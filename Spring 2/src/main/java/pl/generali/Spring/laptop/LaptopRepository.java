@@ -18,4 +18,8 @@ public class LaptopRepository {
     public List<Laptop> findAll() {
         return iLaptopRepository.findAll();
     }
+
+    public void deleteById(Long id) {
+        iLaptopRepository.deleteById(id);
+    }
 }

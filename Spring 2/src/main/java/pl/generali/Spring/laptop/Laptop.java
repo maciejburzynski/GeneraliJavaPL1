@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+import static jakarta.persistence.EnumType.*;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,12 +21,13 @@ public class Laptop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    String make;
+    @Enumerated(STRING)
+    Make make;
     String model;
     @Column(name = "PRICE")
     BigDecimal priceInPln;
 
-    public Laptop(String make, String model, BigDecimal priceInPln) {
+    public Laptop(Make make, String model, BigDecimal priceInPln) {
         this.make = make;
         this.model = model;
         this.priceInPln = priceInPln;
