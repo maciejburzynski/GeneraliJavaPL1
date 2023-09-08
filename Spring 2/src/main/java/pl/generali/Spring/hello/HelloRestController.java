@@ -1,4 +1,4 @@
-package pl.generali.Spring;
+package pl.generali.Spring.hello;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.generali.Spring.apiconsuming.JokeApiConsumer;
+import pl.generali.Spring.apiconsuming.Joke;
 
 import java.io.IOException;
 
@@ -43,15 +45,10 @@ public class HelloRestController {
 
 
     @GetMapping("/api-consuming")
-    public Joke getJoke() {
-        try {
-            return jokeApiConsumer.getRandomJoke();
-        } catch (IOException e) {
-            log.info("No i dupa");
-            return new Joke();
-        } catch (InterruptedException e) {
-            log.info("No i dupa dupa");
-            return new Joke();
-        }
+    public ResponseEntity<Joke> getJoke() throws IOException, InterruptedException {
+        return ResponseEntity
+                .ok()
+                .body(jokeApiConsumer.getRandomJoke());
+
     }
 }

@@ -1,4 +1,4 @@
-package pl.generali.Spring;
+package pl.generali.Spring.apiconsuming;
 
 import lombok.Getter;
 
