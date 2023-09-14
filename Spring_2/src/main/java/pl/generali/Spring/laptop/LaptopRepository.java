@@ -1,9 +1,11 @@
 package pl.generali.Spring.laptop;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -21,5 +23,9 @@ public class LaptopRepository {
 
     public void deleteById(Long id) {
         iLaptopRepository.deleteById(id);
+    }
+
+    public Optional<Laptop> findLaptopById(Long id) {
+        return iLaptopRepository.findById(id);
     }
 }

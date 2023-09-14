@@ -1,0 +1,9 @@
+FindById + Exception
+Update
+Geolocation api consuming + config file
+Mvn wrapper
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=9090”
+@RequestParam
+Swagger
+Flyway
+PdfCreator

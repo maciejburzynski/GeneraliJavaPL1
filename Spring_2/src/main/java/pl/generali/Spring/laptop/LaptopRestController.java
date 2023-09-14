@@ -33,6 +33,11 @@ public class LaptopRestController {
         }
     }
 
+    @GetMapping(path = "/laptops/{id}")
+    ResponseEntity<?> getLaptopById(@PathVariable Long id) {
+        return ResponseEntity.ok(laptopService.findLaptopById(id));
+    }
+
     @PostMapping(path = "/laptops")
     ResponseEntity addLaptop(@RequestBody Laptop laptop) {
         log.info("Adding new laptop: Make: {},  Model: {}, price: {}",
@@ -46,14 +51,13 @@ public class LaptopRestController {
     }
 
     @DeleteMapping(path = "/laptops/{id}")
-    ResponseEntity deleteLaptopById(@PathVariable Long id){
+    ResponseEntity deleteLaptopById(@PathVariable Long id) {
         log.info("Deleting laptop with id of {}", id);
         laptopService.deleteById(id);
         return ResponseEntity
                 .status(204)
                 .build();
     }
-
 
 
     private boolean isFindAllNotEmpty() {

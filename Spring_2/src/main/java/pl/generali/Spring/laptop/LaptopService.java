@@ -1,9 +1,11 @@
 package pl.generali.Spring.laptop;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +23,11 @@ public class LaptopService {
 
     public void deleteById(Long id) {
         laptopRepository.deleteById(id);
+    }
+
+    public Laptop findLaptopById(Long id) {
+        return laptopRepository
+                .findLaptopById(id)
+                .orElseThrow(() -> new LaptopNotFoundException("Laptop with id: " + id + " not found"));
     }
 }

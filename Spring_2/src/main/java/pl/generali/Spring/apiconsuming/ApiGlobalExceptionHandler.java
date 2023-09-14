@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import pl.generali.Spring.laptop.LaptopNotFoundException;
 
 import java.io.IOException;
 
@@ -13,10 +14,10 @@ public class ApiGlobalExceptionHandler {
 
 
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IOException.class)
-    String IOExceptionHandler(IOException ioException){
-        return ioException.getMessage();
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(LaptopNotFoundException.class)
+    String IOExceptionHandler(LaptopNotFoundException laptopNotFoundException){
+        return laptopNotFoundException.getMessage();
     }
 
 }
