@@ -1,4 +1,4 @@
-package pl.generali.Spring.apiconsuming;
+package pl.generali.Spring;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.generali.Spring.laptop.LaptopNotFoundException;
 
-import java.io.IOException;
-
 @ControllerAdvice
-public class ApiGlobalExceptionHandler {
+public class ElectronicShopGlobalExceptionHandler {
 
 
     @ResponseBody

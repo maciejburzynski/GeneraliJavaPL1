@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.generali.Spring.apiconsuming.GeoApiConsumer;
 import pl.generali.Spring.apiconsuming.JokeApiConsumer;
 import pl.generali.Spring.apiconsuming.Joke;
 
@@ -21,6 +22,7 @@ import static org.springframework.http.HttpStatus.*;
 public class HelloRestController {
 
     private final JokeApiConsumer jokeApiConsumer;
+    private final GeoApiConsumer geoApiConsumer;
 
     @GetMapping(path = "/hello")
     public ResponseEntity<String> getHelloMessage(HttpServletResponse httpServletResponse,
@@ -44,11 +46,19 @@ public class HelloRestController {
     }
 
 
-    @GetMapping("/api-consuming")
+    @GetMapping("/api-consuming-joke")
     public ResponseEntity<Joke> getJoke() throws IOException, InterruptedException {
         return ResponseEntity
                 .ok()
                 .body(jokeApiConsumer.getRandomJoke());
+
+    }
+
+    @GetMapping("/api-consuming-geolocation")
+    public ResponseEntity<?> getGeoLocation() throws IOException, InterruptedException {
+        return ResponseEntity
+                .ok()
+                .body(geoApiConsumer.getGeoLocation());
 
     }
 }
