@@ -2,10 +2,13 @@ FindById + Exception
 Update
 Geolocation api consuming + config file
 Mvn wrapper
-./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=9090”
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dproperty_name=property_value”
+
+@OneToOne + OneToMany
 @RequestParam
 Swagger
 Flyway
 optimistic locking/pesimistic locking
 @Scheduled
+Role + Authorities
 PdfCreator
