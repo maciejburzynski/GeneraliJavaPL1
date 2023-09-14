@@ -35,7 +35,9 @@ public class LaptopRestController {
 
     @GetMapping(path = "/laptops/{id}")
     ResponseEntity<?> getLaptopById(@PathVariable Long id) {
+        log.info("Returning laptop with id: {}", id);
         return ResponseEntity.ok(laptopService.findLaptopById(id));
+        //try/catch ---> specific case -> Less specific -> Throwable
     }
 
     @PostMapping(path = "/laptops")
@@ -49,6 +51,17 @@ public class LaptopRestController {
                 .status(NO_CONTENT)
                 .build();
     }
+
+    @PutMapping(path = "/laptops/{id}")
+    ResponseEntity updateLaptop(@PathVariable Long id, @RequestBody Laptop laptop) {
+        log.info("Updating Laptop with id: {}, updated laptop: Make: {},  Model: {}, price: {}",
+                id, laptop.getMake(), laptop.getModel(), laptop.getPriceInPln());
+        laptopService.updateLaptopById(id, laptop);
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
 
     @DeleteMapping(path = "/laptops/{id}")
     ResponseEntity deleteLaptopById(@PathVariable Long id) {

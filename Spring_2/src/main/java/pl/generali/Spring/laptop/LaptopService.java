@@ -30,4 +30,8 @@ public class LaptopService {
                 .findLaptopById(id)
                 .orElseThrow(() -> new LaptopNotFoundException("Laptop with id: " + id + " not found"));
     }
+
+    public void updateLaptopById(Long id, Laptop laptop) {
+        laptopRepository.updateLaptopById(id, laptop);
+    }
 }

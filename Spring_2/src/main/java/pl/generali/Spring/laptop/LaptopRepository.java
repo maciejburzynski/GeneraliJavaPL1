@@ -28,4 +28,11 @@ public class LaptopRepository {
     public Optional<Laptop> findLaptopById(Long id) {
         return iLaptopRepository.findById(id);
     }
+
+    public void updateLaptopById(Long id, Laptop laptop) {
+        iLaptopRepository.updateLaptopById(id,
+                laptop.getMake(),
+                laptop.getModel(),
+                laptop.priceInPln);
+    }
 }

@@ -16,18 +16,18 @@ import static jakarta.persistence.EnumType.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Table(name = "LAPTOPS")
 public class Laptop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @Enumerated(STRING)
-    Make make;
+    String make;
     String model;
     @Column(name = "PRICE")
     BigDecimal priceInPln;
 
-    public Laptop(Make make, String model, BigDecimal priceInPln) {
+    public Laptop(String make, String model, BigDecimal priceInPln) {
         this.make = make;
         this.model = model;
         this.priceInPln = priceInPln;
