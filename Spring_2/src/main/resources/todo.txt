@@ -6,4 +6,6 @@ Mvn wrapper
 @RequestParam
 Swagger
 Flyway
+optimistic locking/pesimistic locking
+@Scheduled
 PdfCreator
