@@ -15,7 +15,6 @@ import java.util.List;
 @ControllerAdvice
 public class ElectronicShopGlobalExceptionHandler {
 
-
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(LaptopNotFoundException.class)

@@ -33,7 +33,7 @@ public class LaptopRepository {
         iLaptopRepository.updateLaptopById(id,
                 laptop.getMake(),
                 laptop.getModel(),
-                laptop.priceInPln);
+                laptop.getPriceInPln());
     }
 
     public List<Laptop> findLaptopsByMake(String make) {
