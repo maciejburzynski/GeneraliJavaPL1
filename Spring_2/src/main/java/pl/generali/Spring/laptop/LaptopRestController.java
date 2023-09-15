@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -19,12 +20,23 @@ public class LaptopRestController {
     private final LaptopService laptopService;
 
     @GetMapping(path = "/laptops")
-    ResponseEntity<List<Laptop>> getAllLaptops(@RequestParam(required = false) String make) {
-        if (make != null) {
+    ResponseEntity<List<Laptop>> getAllLaptops(@RequestParam(required = false) Optional<String> make,
+                                               @RequestParam(required = false) Optional<String> model) {
+        if (make.isPresent() && model.isPresent()) {
+            log.info("Returning laptops with make of: {}, model of: {}", make, model);
+            return ResponseEntity
+                    .ok()
+                    .body(laptopService.findLaptopsByMakeAndModel(make.get(), model.get()));
+        } else if (make.isPresent()) {
             log.info("Returning laptops with make of: {}", make);
             return ResponseEntity
                     .ok()
-                    .body(laptopService.findLaptopByMake(make));
+                    .body(laptopService.findLaptopsByMake(make.get()));
+        } else if (model.isPresent()) {
+            log.info("Returning laptops with model of: {}", model);
+            return ResponseEntity
+                    .ok()
+                    .body(laptopService.findLaptopsByModel(model.get()));
         }
         if (isFindAllNotEmpty()) {
             log.info("Returning all laptops");
@@ -37,6 +49,7 @@ public class LaptopRestController {
                     .status(NOT_FOUND)
                     .body(List.of());
         }
+
     }
 
     @GetMapping(path = "/laptops/{id}")

@@ -35,7 +35,15 @@ public class LaptopService {
         laptopRepository.updateLaptopById(id, laptop);
     }
 
-    public List<Laptop> findLaptopByMake(String make) {
-        return laptopRepository.findLaptopByMake(make);
+    public List<Laptop> findLaptopsByMake(String make) {
+        return laptopRepository.findLaptopsByMake(make);
+    }
+
+    public List<Laptop> findLaptopsByModel(String model) {
+        return laptopRepository.findLaptopsByModel(model);
+    }
+
+    public List<Laptop> findLaptopsByMakeAndModel(String make, String model) {
+        return laptopRepository.findLaptopsByMakeAndModel(make, model);
     }
 }

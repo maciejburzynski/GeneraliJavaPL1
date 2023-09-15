@@ -36,7 +36,15 @@ public class LaptopRepository {
                 laptop.priceInPln);
     }
 
-    public List<Laptop> findLaptopByMake(String make) {
-        return iLaptopRepository.findLaptopByMake(make);
+    public List<Laptop> findLaptopsByMake(String make) {
+        return iLaptopRepository.findLaptopsByMakeEqualsIgnoreCase(make);
+    }
+
+    public List<Laptop> findLaptopsByModel(String model) {
+        return iLaptopRepository.findLaptopsByModelContainingIgnoreCase(model);
+    }
+
+    public List<Laptop> findLaptopsByMakeAndModel(String make, String model) {
+        return iLaptopRepository.findLaptopsByMakeEqualsIgnoreCaseAndModelContainingIgnoreCase(make, model);
     }
 }

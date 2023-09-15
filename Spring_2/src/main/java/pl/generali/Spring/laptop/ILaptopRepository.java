@@ -22,8 +22,8 @@ public interface ILaptopRepository extends JpaRepository<Laptop, Long> {
                           @Param("model") String model,
                           @Param("priceInPln") BigDecimal priceInPln);
 
-    List<Laptop> findLaptopByMake(String make);
+    List<Laptop> findLaptopsByMakeEqualsIgnoreCase(String make);
+    List<Laptop> findLaptopsByModelContainingIgnoreCase(String model);
+    List<Laptop> findLaptopsByMakeEqualsIgnoreCaseAndModelContainingIgnoreCase(String make, String model);
+
 }
-
-//@Query(value = "UPDATE LAPTOPS SET make= null, model= null, price= :priceInPln WHERE id= :id", nativeQuery = true)
-
