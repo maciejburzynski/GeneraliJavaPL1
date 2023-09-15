@@ -1,9 +1,11 @@
 package pl.generali.Spring.laptop;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,8 +61,9 @@ public class LaptopRestController {
         //try/catch ---> specific case -> Less specific -> Throwable
     }
 
+
     @PostMapping(path = "/laptops")
-    ResponseEntity addLaptop(@RequestBody Laptop laptop) {
+    ResponseEntity addLaptop(@RequestBody @Valid Laptop laptop) {
         log.info("Adding new laptop: Make: {},  Model: {}, price: {}",
                 laptop.getMake(),
                 laptop.getModel(),
@@ -72,7 +75,7 @@ public class LaptopRestController {
     }
 
     @PutMapping(path = "/laptops/{id}")
-    ResponseEntity updateLaptop(@PathVariable Long id, @RequestBody Laptop laptop) {
+    ResponseEntity updateLaptop(@PathVariable Long id, @RequestBody @Valid Laptop laptop) {
         log.info("Updating Laptop with id: {}, updated laptop: Make: {},  Model: {}, price: {}",
                 id, laptop.getMake(), laptop.getModel(), laptop.getPriceInPln());
         laptopService.updateLaptopById(id, laptop);
