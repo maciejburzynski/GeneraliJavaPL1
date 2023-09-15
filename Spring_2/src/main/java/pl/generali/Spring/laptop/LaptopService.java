@@ -34,4 +34,8 @@ public class LaptopService {
     public void updateLaptopById(Long id, Laptop laptop) {
         laptopRepository.updateLaptopById(id, laptop);
     }
+
+    public List<Laptop> findLaptopByMake(String make) {
+        return laptopRepository.findLaptopByMake(make);
+    }
 }

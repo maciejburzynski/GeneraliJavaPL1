@@ -35,4 +35,8 @@ public class LaptopRepository {
                 laptop.getModel(),
                 laptop.priceInPln);
     }
+
+    public List<Laptop> findLaptopByMake(String make) {
+        return iLaptopRepository.findLaptopByMake(make);
+    }
 }

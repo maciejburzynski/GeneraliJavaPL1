@@ -19,7 +19,13 @@ public class LaptopRestController {
     private final LaptopService laptopService;
 
     @GetMapping(path = "/laptops")
-    ResponseEntity<List<Laptop>> getAllLaptops() {
+    ResponseEntity<List<Laptop>> getAllLaptops(@RequestParam(required = false) String make) {
+        if (make != null) {
+            log.info("Returning laptops with make of: {}", make);
+            return ResponseEntity
+                    .ok()
+                    .body(laptopService.findLaptopByMake(make));
+        }
         if (isFindAllNotEmpty()) {
             log.info("Returning all laptops");
             return ResponseEntity

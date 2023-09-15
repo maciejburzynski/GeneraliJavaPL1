@@ -14,7 +14,7 @@ public class ElectronicShopGlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(LaptopNotFoundException.class)
-    String IOExceptionHandler(LaptopNotFoundException laptopNotFoundException){
+    String LaptopNotFoundExceptionHandler(LaptopNotFoundException laptopNotFoundException){
         return laptopNotFoundException.getMessage();
     }
 

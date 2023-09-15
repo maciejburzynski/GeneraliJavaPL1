@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface ILaptopRepository extends JpaRepository<Laptop, Long> {
 
@@ -21,6 +22,7 @@ public interface ILaptopRepository extends JpaRepository<Laptop, Long> {
                           @Param("model") String model,
                           @Param("priceInPln") BigDecimal priceInPln);
 
+    List<Laptop> findLaptopByMake(String make);
 }
 
 //@Query(value = "UPDATE LAPTOPS SET make= null, model= null, price= :priceInPln WHERE id= :id", nativeQuery = true)
