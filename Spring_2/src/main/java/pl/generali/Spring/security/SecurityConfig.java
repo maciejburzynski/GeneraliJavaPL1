@@ -1,5 +1,7 @@
 package pl.generali.Spring.security;
 
+import jakarta.servlet.Filter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,10 +12,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final HelloWorldFilter helloWorldFilter;
+    private final AfterHelloWorldFilter afterHelloWorldFilter;
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
@@ -27,6 +34,9 @@ public class SecurityConfig {
         // * -> api/* -> api/laptops -> works api.laptops/34 - does not work
         // ** -> api/** -> api/laptops -> works api.laptops/34 - works
 
+
+        httpSecurity.addFilterBefore(helloWorldFilter, BasicAuthenticationFilter.class);
+        httpSecurity.addFilterAfter(afterHelloWorldFilter, HelloWorldFilter.class);
 
         return httpSecurity.build();
     }
