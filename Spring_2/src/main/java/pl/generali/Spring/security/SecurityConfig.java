@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,23 +26,27 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.httpBasic(Customizer.withDefaults());
         httpSecurity.authorizeHttpRequests(request -> request
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).hasAnyRole("USER", "ADMIN")
+//                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).hasAnyRole("USER", "ADMIN")
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console")).permitAll()
                 .anyRequest().permitAll());
 
+//        httpSecurity.httpBasic(Customizer.withDefaults());
         httpSecurity.formLogin(Customizer.withDefaults());
 
-        // * -> api/* -> api/laptops -> works api.laptops/34 - does not work
-        // ** -> api/** -> api/laptops -> works api.laptops/34 - works
+        httpSecurity.headers(headers -> headers.frameOptions(options -> options.disable()));
+        httpSecurity.csrf(csrf -> csrf.disable());
 
-
-        httpSecurity.addFilterBefore(helloWorldFilter, BasicAuthenticationFilter.class);
-        httpSecurity.addFilterAfter(afterHelloWorldFilter, HelloWorldFilter.class);
+        httpSecurity.addFilterAfter(helloWorldFilter, BasicAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(afterHelloWorldFilter, HelloWorldFilter.class);
 
         return httpSecurity.build();
     }
 
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
 //    @Bean
 //    public UserDetailsService users() {
@@ -57,21 +63,24 @@ public class SecurityConfig {
 //        return new InMemoryUserDetailsManager(user, admin);
 //    }
 
-    @Bean
-    public UserDetailsService users() {
-        // The builder will ensure the passwords are encoded before saving in memory
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-        UserDetails user = users
-                .username("user")
-                .password("password1")
-                .roles("USER")
-                .build();
-        UserDetails admin = users
-                .username("admin")
-                .password("password1")
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
+//    @Bean
+//    public UserDetailsService users() {
+//        // The builder will ensure the passwords are encoded before saving in memory
+//        User.UserBuilder users = User.withDefaultPasswordEncoder();
+//        UserDetails user = users
+//                .username("user")
+//                .password("password1")
+//                .roles("USER")
+//                .build();
+//        UserDetails admin = users
+//                .username("admin")
+//                .password("password1")
+//                .roles("USER", "ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
+// -> api/token
 
+//  no token  -> api/laptops -> 401
+//   token  -> api/laptops -> 200 + if allowed (permisions restricted)
 }

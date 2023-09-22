@@ -17,11 +17,7 @@ public class HelloWorldFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        log.info("Request body: {}", request.getInputStream());
-        log.info("Response body: {}", response.getOutputStream());
-
         filterChain.doFilter(request, response);
-
 
     }
 }

@@ -2,17 +2,22 @@ package pl.generali.Spring.laptop;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServer;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import pl.generali.Spring.monitor.Monitor;
 import pl.generali.Spring.monitor.MonitorService;
 import pl.generali.Spring.order.Order;
 import pl.generali.Spring.order.OrderService;
+import pl.generali.Spring.security.User;
+import pl.generali.Spring.security.UserRole;
+import pl.generali.Spring.security.UserService;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static pl.generali.Spring.laptop.Make.*;
+import static pl.generali.Spring.security.UserRole.*;
 
 @Component
 @RequiredArgsConstructor
@@ -21,6 +26,7 @@ public class DataInitializer {
     private final LaptopService laptopService;
     private final MonitorService monitorService;
     private final OrderService orderService;
+    private final UserService userService;
 
 
     @EventListener(ApplicationReadyEvent.class)
@@ -59,5 +65,10 @@ public class DataInitializer {
         orderService.save(order);
         orderService.save(order1);
 
+        User user = new User("user", "user", USER);
+        User admin = new User("admin", "admin", ADMIN);
+
+        userService.save(user);
+        userService.save(admin);
     }
 }
