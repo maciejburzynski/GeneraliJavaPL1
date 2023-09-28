@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +21,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import static org.springframework.security.config.http.SessionCreationPolicy.*;
 
 @Configuration
 @RequiredArgsConstructor
@@ -37,8 +40,7 @@ public class SecurityConfig {
 //                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).hasAnyRole("USER", "ADMIN")
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/token")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console")).permitAll()
-//                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).hasAuthority("rest-api:read")
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).hasRole("USER")
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).hasAuthority("rest-api:read")
                 .anyRequest().permitAll());
 
         httpSecurity.httpBasic(basic -> basic.disable());
@@ -48,6 +50,7 @@ public class SecurityConfig {
         httpSecurity.headers(headers -> headers.frameOptions(options -> options.disable()));
         httpSecurity.csrf(csrf -> csrf.disable());
 
+        httpSecurity.sessionManagement(session -> session.sessionCreationPolicy(STATELESS));
 
         httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         httpSecurity.addFilterAfter(helloWorldFilter, BasicAuthenticationFilter.class);

@@ -3,12 +3,34 @@ Update
 Geolocation api consuming + config file
 Mvn wrapper
 ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dproperty_name=property_value”
-
+Role + Authorities
 @OneToOne + OneToMany
 @RequestParam
 Swagger
-Flyway
 optimistic locking/pesimistic locking
+
+Flyway
 @Scheduled
-Role + Authorities
 PdfCreator
+Angular - basic api consumption
+
+
+- Angular/CLI/AnyConsumer -
+-auth-user-service -
+-mail-service
+-pdf-service
+-order-service
+
+
+each service:
+
+-DB-h2 db
+-Rest API
+-Spring Data JPA
+-Swagger
+-Flyway
+-Lombok
+-JWT - auth service - creation, other services - validation
+-Unit tests for each - Spock
+-Integration test - Spock
+-E2E tests (?)

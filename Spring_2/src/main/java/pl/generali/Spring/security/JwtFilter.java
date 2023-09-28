@@ -28,18 +28,14 @@ public class JwtFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        String jwtHeaderOrCookieName = "auth-generali-jwt";
-        // JWT from header:
-//        request.getHeader(jwtHeaderOrCookieName);
-        // JWT from Cookie:
-//        request.getCookies(jwtHeaderOrCookieName);
+        String jwtHeaderOrCookieName = "Authorization";
 
         if (request.getHeader(jwtHeaderOrCookieName) == null) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String token = request.getHeader(jwtHeaderOrCookieName);
+        String token = request.getHeader(jwtHeaderOrCookieName).substring(7);
 
         Algorithm algorithm = Algorithm.HMAC256("key-generali");
         JWTVerifier verifier = JWT.require(algorithm).build();
