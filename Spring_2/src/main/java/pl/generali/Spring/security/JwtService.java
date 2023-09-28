@@ -31,7 +31,7 @@ public class JwtService {
 
         Algorithm algorithm = Algorithm.HMAC256("key-generali");
         String token = JWT.create()
-                .withSubject(user.getUsername() + "-generali")
+                .withSubject(user.getUsername())
                 .withArrayClaim("permissions", permissions)
                 .withExpiresAt(new Date(System.currentTimeMillis() + (10 * 60 * 1000))) // 10 minutes
                 .sign(algorithm);

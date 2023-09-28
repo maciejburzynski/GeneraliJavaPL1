@@ -28,6 +28,7 @@ public class DataInitializer {
     private final MonitorService monitorService;
     private final OrderService orderService;
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
 
     @EventListener(ApplicationReadyEvent.class)
@@ -66,8 +67,8 @@ public class DataInitializer {
         orderService.save(order);
         orderService.save(order1);
 
-        User user = new User("user", "user", USER);
-        User admin = new User("admin","admin", ADMIN);
+        User user = new User("user", passwordEncoder.encode("user"), USER);
+        User admin = new User("admin", passwordEncoder.encode("admin"), ADMIN);
 
         userService.save(user);
         userService.save(admin);

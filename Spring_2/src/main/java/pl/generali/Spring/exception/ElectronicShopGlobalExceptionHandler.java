@@ -1,6 +1,7 @@
 package pl.generali.Spring.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,6 +21,13 @@ public class ElectronicShopGlobalExceptionHandler {
     @ExceptionHandler(LaptopNotFoundException.class)
     String LaptopNotFoundExceptionHandler(LaptopNotFoundException laptopNotFoundException) {
         return laptopNotFoundException.getMessage();
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(UsernameNotFoundException.class)
+    String UsernameNotFoundExceptionHandler(UsernameNotFoundException usernameNotFoundException) {
+        return usernameNotFoundException.getMessage();
     }
 
     @ResponseBody
