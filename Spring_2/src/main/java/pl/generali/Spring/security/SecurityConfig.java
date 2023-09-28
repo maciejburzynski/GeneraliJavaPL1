@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -23,6 +26,8 @@ public class SecurityConfig {
 
     private final HelloWorldFilter helloWorldFilter;
     private final AfterHelloWorldFilter afterHelloWorldFilter;
+    private final UserService userService;
+
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
@@ -34,6 +39,7 @@ public class SecurityConfig {
 //        httpSecurity.httpBasic(Customizer.withDefaults());
         httpSecurity.formLogin(Customizer.withDefaults());
 
+
         httpSecurity.headers(headers -> headers.frameOptions(options -> options.disable()));
         httpSecurity.csrf(csrf -> csrf.disable());
 
@@ -42,11 +48,11 @@ public class SecurityConfig {
 
         return httpSecurity.build();
     }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
 
 //    @Bean
 //    public UserDetailsService users() {

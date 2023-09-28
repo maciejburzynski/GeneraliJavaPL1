@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServer;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.generali.Spring.monitor.Monitor;
 import pl.generali.Spring.monitor.MonitorService;
@@ -66,7 +67,7 @@ public class DataInitializer {
         orderService.save(order1);
 
         User user = new User("user", "user", USER);
-        User admin = new User("admin", "admin", ADMIN);
+        User admin = new User("admin","admin", ADMIN);
 
         userService.save(user);
         userService.save(admin);
