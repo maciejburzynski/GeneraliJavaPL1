@@ -41,10 +41,10 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/token")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).hasAuthority("rest-api:read")
-                .anyRequest().permitAll());
+                .anyRequest().authenticated());
 
         httpSecurity.httpBasic(basic -> basic.disable());
-        httpSecurity.formLogin(login -> login.disable());
+        httpSecurity.formLogin(Customizer.withDefaults());
 
 
         httpSecurity.headers(headers -> headers.frameOptions(options -> options.disable()));
