@@ -37,14 +37,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request -> request
-//                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).hasAnyRole("USER", "ADMIN")
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/token")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).hasAuthority("rest-api:read")
-                .anyRequest().authenticated());
+                .anyRequest().permitAll());
 
         httpSecurity.httpBasic(basic -> basic.disable());
-        httpSecurity.formLogin(Customizer.withDefaults());
+        httpSecurity.formLogin(form -> form.disable());
 
 
         httpSecurity.headers(headers -> headers.frameOptions(options -> options.disable()));

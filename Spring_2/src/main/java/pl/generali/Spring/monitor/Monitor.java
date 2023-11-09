@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import static jakarta.persistence.GenerationType.AUTO;
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -16,9 +18,8 @@ import java.math.BigDecimal;
 public class Monitor {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = AUTO)
     private Long id;
-
     private String make;
     private String model;
     private BigDecimal price;

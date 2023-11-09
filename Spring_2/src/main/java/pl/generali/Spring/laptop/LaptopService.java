@@ -1,6 +1,8 @@
 package pl.generali.Spring.laptop;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,8 @@ public class LaptopService {
         laptopRepository.save(laptop);
     }
 
-    public List<Laptop> findAll() {
-        return laptopRepository.findAll();
+    public Page<Laptop> findAll(Pageable pageable) {
+        return laptopRepository.findAll(pageable);
     }
 
     public void deleteById(Long id) {

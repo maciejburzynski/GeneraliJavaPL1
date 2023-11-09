@@ -3,6 +3,10 @@ package pl.generali.Spring.laptop;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,7 +26,7 @@ public class LaptopRestController {
     private final LaptopService laptopService;
 
     @GetMapping(path = "/laptops")
-    ResponseEntity<List<Laptop>> getAllLaptops(@RequestParam(required = false) Optional<String> make,
+    ResponseEntity<?> getAllLaptops(@RequestParam(required = false) Optional<String> make,
                                                @RequestParam(required = false) Optional<String> model) {
         if (make.isPresent() && model.isPresent()) {
             log.info("Returning laptops with make of: {}, model of: {}", make, model);
@@ -40,11 +44,12 @@ public class LaptopRestController {
                     .ok()
                     .body(laptopService.findLaptopsByModel(model.get()));
         }
-        if (isFindAllNotEmpty()) {
+            Pageable pageable = PageRequest.of(2, 2);
+        if (isFindAllNotEmpty(pageable)) {
             log.info("Returning all laptops");
             return ResponseEntity
                     .ok()
-                    .body(laptopService.findAll());
+                    .body(laptopService.findAll(pageable));
         } else {
             log.info("There is no laptops to return");
             return ResponseEntity
@@ -95,8 +100,8 @@ public class LaptopRestController {
     }
 
 
-    private boolean isFindAllNotEmpty() {
-        return !laptopService.findAll().isEmpty();
+    private boolean isFindAllNotEmpty(Pageable pageable) {
+        return !laptopService.findAll(pageable).isEmpty();
     }
 }
 
