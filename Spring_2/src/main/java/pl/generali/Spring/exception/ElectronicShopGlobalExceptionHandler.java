@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pl.generali.Spring.laptop.LaptopNotFoundException;
+import pl.generali.Spring.order.product.laptop.LaptopNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

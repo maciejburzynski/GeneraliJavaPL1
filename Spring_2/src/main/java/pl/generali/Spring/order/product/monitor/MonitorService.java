@@ -1,4 +1,4 @@
-package pl.generali.Spring.monitor;
+package pl.generali.Spring.order.product.monitor;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

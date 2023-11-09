@@ -1,4 +1,4 @@
-package pl.generali.Spring.laptop;
+package pl.generali.Spring.order.product.laptop;
 
 import lombok.Getter;
 

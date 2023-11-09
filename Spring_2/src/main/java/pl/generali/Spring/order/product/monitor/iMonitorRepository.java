@@ -1,4 +1,4 @@
-package pl.generali.Spring.monitor;
+package pl.generali.Spring.order.product.monitor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
