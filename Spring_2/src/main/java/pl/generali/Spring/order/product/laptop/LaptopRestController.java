@@ -68,7 +68,7 @@ public class LaptopRestController {
         log.info("Adding new laptop: Make: {},  Model: {}, price: {}",
                 laptop.getMake(),
                 laptop.getModel(),
-                laptop.getPriceInPln());
+                laptop.getPrice());
         laptopService.save(laptop);
         return ResponseEntity
                 .status(NO_CONTENT)
@@ -78,7 +78,7 @@ public class LaptopRestController {
     @PutMapping(path = "/laptops/{id}")
     ResponseEntity updateLaptop(@PathVariable Long id, @RequestBody @Valid Laptop laptop) {
         log.info("Updating Laptop with id: {}, updated laptop: Make: {},  Model: {}, price: {}",
-                id, laptop.getMake(), laptop.getModel(), laptop.getPriceInPln());
+                id, laptop.getMake(), laptop.getModel(), laptop.getPrice());
         laptopService.updateLaptopById(id, laptop);
         return ResponseEntity
                 .ok()

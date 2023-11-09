@@ -12,9 +12,8 @@ import java.math.BigDecimal;
 
 import static jakarta.persistence.GenerationType.AUTO;
 
-@Entity
-@NoArgsConstructor
 @Data
+@Entity
 @Table(name = "MONITORS")
 public class Monitor extends Product {
 

@@ -39,7 +39,8 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(request -> request
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/token")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).hasAuthority("rest-api:read")
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).permitAll()
+//                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**)")).hasAuthority("rest-api:read")
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui.html")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**")).permitAll()

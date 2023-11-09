@@ -10,11 +10,8 @@ import pl.generali.Spring.order.product.Product;
 import pl.generali.Spring.order.product.monitor.Monitor;
 
 import java.math.BigDecimal;
-
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+@Entity
 @Table(name = "LAPTOPS")
 public class Laptop extends Product {
 

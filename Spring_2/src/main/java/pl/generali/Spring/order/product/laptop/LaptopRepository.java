@@ -34,7 +34,7 @@ public class LaptopRepository {
         iLaptopRepository.updateLaptopById(id,
                 laptop.getMake(),
                 laptop.getModel(),
-                laptop.getPriceInPln());
+                laptop.getPrice());
     }
 
     public List<Laptop> findLaptopsByMake(String make) {
