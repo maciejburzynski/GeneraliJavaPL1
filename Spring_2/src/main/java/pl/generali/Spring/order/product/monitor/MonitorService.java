@@ -18,4 +18,9 @@ public class MonitorService {
     public void save(Monitor monitor) {
         monitorRepository.save(monitor);
     }
+
+    public Monitor findById(Long monitorId) {
+        return  monitorRepository.findById(monitorId)
+                .orElseThrow(() -> new MonitorNotFoundException("Monitor with id " + monitorId + " does not exist"));
+    }
 }

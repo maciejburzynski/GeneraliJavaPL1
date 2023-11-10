@@ -11,3 +11,7 @@ create sequence monitors_seq start with 1 increment by 1;
 
 insert into monitors(id, make, model, price, order_id)
     values (1, 'lenovo','xd', 1000, null);
+insert into monitors(id, make, model, price, order_id)
+    values (2, 'apple','xd', 1000, null);
+insert into monitors(id, make, model, price, order_id)
+    values (3, 'sony','xd', 1000, null);

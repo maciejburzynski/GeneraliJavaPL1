@@ -1,4 +1,4 @@
-package pl.generali.Spring.customer;
+package pl.generali.Spring.order.customer;
 
 import jakarta.persistence.*;
 import lombok.Data;

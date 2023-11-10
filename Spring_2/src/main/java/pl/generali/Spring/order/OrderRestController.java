@@ -24,8 +24,8 @@ public class OrderRestController {
 
     @RequestMapping(method = POST)
     @ResponseStatus(HttpStatus.OK)
-    void addOrder(@RequestBody Order order) {
-        orderService.save(order);
+    void addOrder(@RequestBody OrderDto order) {
+        orderService.verifyAndSave(order);
     }
 
 }

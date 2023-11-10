@@ -8,4 +8,4 @@ create table orders (
 create sequence orders_seq start with 1 increment by 1;
 
 insert into orders(id, customer_id, price)
-    values (1, 1, 1000);
+    values (nextval('orders_seq'), 1, 1000);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.generali.Spring.order.product.laptop.LaptopNotFoundException;
+import pl.generali.Spring.order.product.monitor.MonitorNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,12 @@ public class ElectronicShopGlobalExceptionHandler {
     @ExceptionHandler(LaptopNotFoundException.class)
     String LaptopNotFoundExceptionHandler(LaptopNotFoundException laptopNotFoundException) {
         return laptopNotFoundException.getMessage();
+    }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(MonitorNotFoundException.class)
+    String monitorNotFoundExceptionHandler(MonitorNotFoundException monitorNotFoundException) {
+        return monitorNotFoundException.getMessage();
     }
 
     @ResponseBody
