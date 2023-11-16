@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import pl.generali.Spring.order.customer.Customer;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 public class OrderDto {
